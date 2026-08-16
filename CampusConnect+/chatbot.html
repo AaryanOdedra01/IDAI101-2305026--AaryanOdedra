@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat | CampusConnect+</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #3b82f6, #8b5cf6, #ec4899, #f43f5e);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            padding: 20px 40px;
+            background: rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: flex-start; /* Pushes everything to the left */
+            align-items: center;
+            gap: 30px; /* Adds space between the Back button and Logo */
+        }
+
+        .logo { font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 800; }
+        .logo span { color: #fde047; }
+        
+        .btn-glass {
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid white;
+            transition: 0.3s;
+        }
+        .btn-glass:hover { background: white; color: #6366f1; }
+
+        .main-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+            padding: 40px;
+        }
+
+        .chat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 50px;
+            max-width: 600px;
+            text-align: center; 
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-card h1 { font-family: 'Outfit', sans-serif; font-size: 2.8rem; margin-bottom: 15px; color: #fde047; }
+        .chat-card p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 20px; line-height: 1.6; }
+
+        /* Dialogflow CSS adjustments */
+        df-messenger {
+            /* Changed from pink to indigo/blue to match the theme */
+            --df-messenger-button-titlebar-color: #6366f1;
+            --df-messenger-button-titlebar-font-color: #ffffff;
+            --df-messenger-chat-background-color: #ffffff;
+            --df-messenger-bot-message: #f1f5f9;
+            --df-messenger-font-color: #1e293b;
+            --df-messenger-user-message: #6366f1;
+            --df-messenger-user-message-font-color: #ffffff;
+            --df-messenger-send-icon: #6366f1;
+
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <!-- Both elements are now grouped on the left, leaving the right side completely clear -->
+        <a href="index.html" class="btn-glass">← Back to Main Site</a>
+        <div class="logo">CampusConnect<span>+</span></div>
+    </header>
+
+    <div class="main-container">
+        <div class="chat-card">
+            <h1>CampusConnect+ AI Portal</h1>
+            <p>Welcome! The assistant is ready to help you with attendance, exam schedules, fee receipts, and school circulars.</p>
+            <p><strong>The chat window is open in the bottom right corner of your screen. Say "Hi" to begin!</strong></p>
+        </div>
+    </div>
+
+    <!-- DIALOGFLOW INTEGRATION -->
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <df-messenger
+      intent="WELCOME"
+      chat-title="CampusConnect+ Support"
+      agent-id="4eb2699a-3de1-4018-9ed2-e90899059577"
+      language-code="en"
+      expand="true"
+    ></df-messenger>
+
+</body>
+</html>

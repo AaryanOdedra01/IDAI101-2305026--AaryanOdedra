@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusConnect+ | Udgam School</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #ec4899;
+            --tertiary: #8b5cf6;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-light: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #3b82f6, #8b5cf6, #ec4899, #f43f5e);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        header {
+            padding: 20px 0; position: sticky; top: 0; z-index: 100;
+            background: rgba(0,0,0,0.1); backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8rem; font-weight: 800; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+        .logo span { color: #fde047; }
+        nav a { color: white; text-decoration: none; margin-left: 25px; font-weight: 600; transition: 0.3s; }
+        nav a:hover { color: #fde047; }
+
+        .btn {
+            display: inline-block; padding: 12px 28px; border-radius: 50px;
+            text-decoration: none; font-weight: 600; cursor: pointer;
+            transition: all 0.3s ease; border: none; font-family: 'Poppins', sans-serif;
+        }
+        .btn-glow { background: linear-gradient(90deg, #fde047, #f59e0b); color: #1e293b; box-shadow: 0 0 20px rgba(253, 224, 71, 0.4); }
+        .btn-glow:hover { transform: translateY(-3px); box-shadow: 0 0 30px rgba(253, 224, 71, 0.7); }
+        .btn-glass { background: rgba(255,255,255,0.2); color: white; border: 1px solid white; }
+        .btn-glass:hover { background: white; color: var(--primary); }
+
+        section { padding: 100px 0; }
+        .text-center { text-align: center; }
+        .section-title { font-size: 2.8rem; margin-bottom: 40px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+
+        .hero { min-height: 80vh; display: flex; align-items: center; text-align: center; }
+        .hero h2 { font-size: 4rem; line-height: 1.1; margin-bottom: 20px; }
+        .hero p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 40px; opacity: 0.9; }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { padding: 40px; transition: transform 0.3s; }
+        .card:hover { transform: translateY(-10px); }
+        .card h3 { font-size: 1.5rem; margin-bottom: 15px; color: #fde047; }
+        .icon-box { font-size: 3rem; margin-bottom: 20px; }
+
+        .flow { display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap; }
+        .flow-step { text-align: center; padding: 20px; width: 220px; }
+        .flow-step .num { width: 40px; height: 40px; background: #fde047; color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin: 0 auto 15px; }
+
+        .tags { margin-top: 40px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .tag { background: rgba(0,0,0,0.3); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; }
+
+        footer { padding: 40px 0; border-top: 1px solid var(--glass-border); margin-top: 50px; background: rgba(0,0,0,0.2); backdrop-filter: blur(10px); }
+        .footer-links a { color: white; margin: 0 15px; text-decoration: none; opacity: 0.8; }
+        .footer-links a:hover { opacity: 1; text-decoration: underline; color: #fde047; }
+        .student-info { margin-bottom: 20px; font-size: 0.95rem; opacity: 0.9; }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px);
+            display: none; justify-content: center; align-items: center; z-index: 1000;
+        }
+        .modal-overlay.active { display: flex; animation: fadeIn 0.3s ease; }
+        .modal-content {
+            background: #ffffff; color: #1e293b; width: 90%; max-width: 600px;
+            border-radius: 20px; padding: 40px; position: relative;
+        }
+        .close-btn {
+            position: absolute; top: 20px; right: 20px; background: #ef4444; color: white; border: none;
+            width: 35px; height: 35px; border-radius: 50%; font-size: 1.2rem; cursor: pointer;
+        }
+        .doc-header { text-align: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 20px; margin-bottom: 20px; }
+        .doc-row { display: flex; justify-content: space-between; border-bottom: 1px dashed #cbd5e1; padding: 10px 0; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        
+        @media print {
+            body * { visibility: hidden; }
+            .print-area, .print-area * { visibility: visible; }
+            .print-area { position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 0; background: white; color: black; box-shadow: none; }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-content">
+            <div class="logo">CampusConnect<span>+</span></div>
+            <nav>
+                <a href="#about">The Problem</a>
+                <a href="#features">Features</a>
+                <a href="#demos">System Demos</a>
+                <a href="chatbot.html" class="btn btn-glow" style="margin-left: 20px; color: #1e293b; padding: 8px 20px;">💬 Open Chatbot</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h2>Your School's AI <br><span style="color: #fde047;">First Responder</span></h2>
+            <p>An intelligent chatbot that handles repetitive parent queries about attendance, exams, and fees—so the staff at Udgam School for Children doesn't have to.</p>
+            <a href="chatbot.html" class="btn btn-glow">💬 Launch AI Chatbot</a>
+            <a href="#demos" class="btn btn-glass" style="margin-left: 10px;">View System Demos</a>
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <div class="glass card grid-2">
+            <div>
+                <h3 style="color: #fde047;">The Problem</h3>
+                <p>Schools get flooded with identical questions: <em>"When are the exams?", "Is tomorrow a holiday?", "Can I see the fee receipt?"</em> Processing these manually frustrates parents and drains administrative staff hours.</p>
+            </div>
+            <div>
+                <h3 style="color: #67e8f9;">The AI Solution</h3>
+                <p>CampusConnect+ automates the first line of communication. Available 24/7, it retrieves dynamic data instantly, allowing parents to get answers, pay fees, and download documents through a friendly chat interface.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="container">
+        <h2 class="section-title text-center">What It Can Do</h2>
+        <div class="grid-3">
+            <div class="glass card text-center"><div class="icon-box">📊</div><h3>Attendance</h3><p>Instantly check daily attendance, request term reports, or submit absence notifications.</p></div>
+            <div class="glass card text-center"><div class="icon-box">📝</div><h3>Exams & Results</h3><p>Fetch real-time exam schedules, access latest grade results, and download secure admit cards.</p></div>
+            <div class="glass card text-center"><div class="icon-box">💳</div><h3>Fee Management</h3><p>Review due dates, generate past receipts, and link out to secure payment gateways.</p></div>
+        </div>
+    </section>
+
+    <section id="demos" class="container text-center">
+        <div class="glass card" style="max-width: 800px; margin: 0 auto;">
+            <h2 class="section-title" style="margin-bottom: 10px;">Try the Mock Systems</h2>
+            <p style="margin-bottom: 30px;">When the chatbot provides download links or payment buttons in the chat, they link out to dynamic mock systems like the ones below:</p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <button class="btn btn-glass" onclick="openModal('admitCardModal')">📄 View Admit Card</button>
+                <button class="btn btn-glass" onclick="openModal('feeReceiptModal')">🧾 View Fee Receipt</button>
+                <button class="btn btn-glass" onclick="openModal('reportCardModal')">📈 View Report Card</button>
+                <button class="btn btn-glow" onclick="openModal('paymentModal')">💳 Demo Payment Portal</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container text-center footer-links">
+            <p style="margin-bottom: 5px; font-weight: 800; font-size: 1.3rem; color: #fde047;">CampusConnect+ | AI Real-World Applications</p>
+            <div class="student-info">
+                Summative Assessment (SA) Project <br>
+                Developed by <strong>Aaryan Odedra</strong> (SID: 2305026) <br>
+                IB Grade 11 | Udgam School for Children | Subject: Artificial Intelligence
+            </div>
+            <div>
+                <a href="https://github.com/AaryanOdedra01/IDAI101-2305026--AaryanOdedra" target="_blank">GitHub Repository</a> • 
+                <a href="chatbot.html">Open Chatbot</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admit Card Modal -->
+    <div id="admitCardModal" class="modal-overlay">
+        <div class="modal-content print-area">
+            <button class="close-btn no-print" onclick="closeModal('admitCardModal')">×</button>
+            <div class="doc-header"><h2 style="color: var(--primary);">UDGAM SCHOOL FOR CHILDREN</h2><h4>TERM 2 - ADMIT CARD</h4></div>
+            <div class="doc-row"><strong>Student:</strong> <span>Aaryan Odedra</span></div>
+            <div class="doc-row"><strong>Student ID:</strong> <span>2305026</span></div>
+            <div class="doc-row"><strong>Grade:</strong> <span>IB Grade 11</span></div>
+            <div class="text-center no-print" style="margin-top: 30px;"><button class="btn btn-glow" onclick="window.print()">🖨️ Print Document</button></div>
+        </div>
+    </div>
+
+    <!-- Fee Receipt Modal -->
+    <div id="feeReceiptModal" class="modal-overlay">
+        <div class="modal-content print-area">
+            <button class="close-btn no-print" onclick="closeModal('feeReceiptModal')">×</button>
+            <div class="doc-header"><h2 style="color: var(--primary);">UDGAM SCHOOL FOR CHILDREN</h2><h4>OFFICIAL FEE RECEIPT</h4></div>
+            <div class="doc-row"><strong>Student:</strong> <span>Aaryan Odedra (SID: 2305026)</span></div>
+            <div class="doc-row"><strong>Tuition Fee:</strong> <span>$1,200.00</span></div>
+            <div class="doc-row"><strong>Lab Fee:</strong> <span>$150.00</span></div>
+            <div class="doc-row" style="font-size: 1.2rem; border-top: 2px solid #1e293b; padding-top:10px;"><strong>TOTAL PAID:</strong> <strong>$1,350.00</strong></div>
+            <div class="text-center no-print" style="margin-top: 30px;"><button class="btn btn-glow" onclick="window.print()">🖨️ Print Receipt</button></div>
+        </div>
+    </div>
+
+    <!-- Report Card Modal -->
+    <div id="reportCardModal" class="modal-overlay">
+        <div class="modal-content print-area">
+            <button class="close-btn no-print" onclick="closeModal('reportCardModal')">×</button>
+            <div class="doc-header"><h2 style="color: var(--primary);">UDGAM SCHOOL FOR CHILDREN</h2><h4>TERM 1 ACADEMIC REPORT</h4></div>
+            <div class="doc-row"><strong>Student:</strong> <span>Aaryan Odedra</span></div>
+            <div class="doc-row"><strong>Mathematics:</strong> <span>A- (91%)</span></div>
+            <div class="doc-row"><strong>Science:</strong> <span>A (95%)</span></div>
+            <div class="doc-row" style="background: #f1f5f9; padding: 15px; margin-top: 15px;"><strong>Attendance:</strong> <span style="color: #16a34a; font-weight: bold;">96% (43/45 days)</span></div>
+            <div class="text-center no-print" style="margin-top: 30px;"><button class="btn btn-glow" onclick="window.print()">🖨️ Print Report</button></div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal-overlay">
+        <div class="modal-content text-center">
+            <button class="close-btn" onclick="closeModal('paymentModal')">×</button>
+            <h2 style="color: var(--primary); margin-bottom: 5px;">Secure Fee Portal</h2>
+            <h1 style="font-size: 3rem; color: #1e293b; margin-bottom: 20px;">$1,350.00</h1>
+            <p style="margin-bottom: 20px;">Student: Aaryan Odedra (IB Grade 11)</p>
+            <button id="payBtn" class="btn btn-glow" style="width: 100%; font-size: 1.2rem;" onclick="processDemoPayment()">💳 Pay Now</button>
+            <div id="paymentSuccessMsg" style="display: none; margin-top: 20px; padding: 20px; background: #dcfce7; color: #166534;">
+                <strong>✅ Payment Successful!</strong><br><span style="font-size: 0.9rem;">(Demo transaction)</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+            if(id === 'paymentModal') {
+                document.getElementById('payBtn').style.display = 'block';
+                document.getElementById('payBtn').innerText = '💳 Pay Now';
+                document.getElementById('paymentSuccessMsg').style.display = 'none';
+            }
+        }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+        window.onclick = function(e) { if (e.target.classList.contains('modal-overlay')) e.target.classList.remove('active'); }
+        function processDemoPayment() {
+            const btn = document.getElementById('payBtn');
+            const msg = document.getElementById('paymentSuccessMsg');
+            btn.innerText = "⏳ Processing..."; btn.style.opacity = "0.7";
+            setTimeout(() => { btn.style.display = "none"; msg.style.display = "block"; }, 1500);
+        }
+    </script>
+</body>
+</html>
