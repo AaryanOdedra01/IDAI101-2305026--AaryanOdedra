@@ -1,6 +1,7 @@
 # CampusConnect+ 🎓
 
 **🌐 Live Project Link:** https://campusconnectplus.netlify.app/
+
 **💻 GitHub Repository:** https://github.com/AaryanOdedra01/IDAI101-2305026--AaryanOdedra.git
 
 ---
